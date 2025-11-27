@@ -135,15 +135,15 @@ def urls_to_string(results):
 
 def main():
     # Đọc CSV
-    df = pd.read_csv("../data/test.csv")
+    df = pd.read_csv("data/test.csv")
 
     if "statement" not in df.columns:
         raise ValueError("File CSV không có cột 'statement'")
 
-    if "URL" not in df.columns:
-        df["URL"] = ""
+    if "urls" not in df.columns:
+        df["urls"] = ""
 
-    output_path = "../output/google_search.csv"
+    output_path = "google_search/test.csv"
 
     # Duyệt theo index để dễ cập nhật trực tiếp vào df
     # đảo ngược thứ tự để đi từ cuối file lên đầu giống code ban đầu
@@ -152,7 +152,7 @@ def main():
     for idx, statement in tqdm(series_statements.items(), desc="Processing"):
         # idx ở đây là index thật của df (do iloc[::-1] giữ nguyên index gốc)
 
-        existing = df.at[idx, "URL"]
+        existing = df.at[idx, "urls"]
         if isinstance(existing, str) and existing.strip() != "":
             continue
 
@@ -166,7 +166,7 @@ def main():
             print(f"Error at row {idx}: {e}")
             urls_str = ""
 
-        df.at[idx, "URL"] = urls_str
+        df.at[idx, "urls"] = urls_str
 
         # Ghi file ngay sau khi xử lý xong một dòng
         df.to_csv(output_path, index=False)

@@ -1,0 +1,66 @@
+You are an expert in detecting and analyzing fake news. Evaluate the credibility of the given statement and assign one of the following ratings:
+    • TRUE: The statement is entirely accurate and aligns with established facts or widely accepted knowledge. There are no significant errors, omissions, or misleading elements, and the information is consistent with reputable sources.
+    • mostly-true: The statement is mostly accurate but contains minor inaccuracies or omissions that do not substantially affect the core truth. These small details may be misleading or incomplete, but they don't change the overall message.
+    • half-true: The statement contains both true and false elements. Key parts are misleading, incomplete, or exaggerated in ways that distort the full picture. Important details that would provide a more accurate understanding are missing.
+    • barely-true: The statement is largely inaccurate, with the main claim being false or heavily exaggerated. However, a small portion of the truth exists, often peripheral or unrelated to the central claim. This truth does not substantially alter the misleading nature of the statement.
+    • FALSE: The statement is fundamentally incorrect. The core claim is unsupported by facts. While there may be some minor truths, they do not substantiate the central message, and the statement is misleading or factually inaccurate based on credible evidence.
+    • pants-fire: The statement is outright false and likely intended to deceive or manipulate the audience. It is unsupported by any credible evidence, facts, or reasoning, and its purpose is often to provoke or spread misinformation.
+
+    Use the following format for your evaluation:
+    Example 1:
+    Statement: "The last quarter, it was just announced, our gross domestic product was below zero. Who ever heard of this? It's never below zero."
+    Speaker: Donald Trump
+    Context: Presidential announcement speech
+    Label: Pants-Fire
+    Justification: According to the Bureau of Economic Analysis and National Bureau of Economic Research, the gross domestic product has been below zero 42 times over 68 years, which contradicts the claim of it “never” happening. The statement is rated "pants-fire."
+
+    Example 2:
+    Statement: "Newly Elected Republican Senators Sign Pledge to Eliminate Food Stamp Program in 2015."
+    Speaker: Facebook posts
+    Context: Social media posting
+    Label: Pants-Fire
+    Justification: The claim was based on a satirical article from a parody website, widely shared on social media. The information is entirely false, so the statement is rated "pants-fire."
+
+    Example 3:
+    Statement: "Under the health care law, everybody will have lower rates, better quality care and better access."
+    Speaker: Nancy Pelosi
+    Context: On 'Meet the Press'
+    Label: False
+    Justification: While a study cited by Pelosi suggested some people would pay less, the term "everybody" was misleading as not all individuals would benefit in the same way. Some people would actually pay more. Thus, the statement is rated "False."
+
+    Your Task: Evaluate the provided statement, speaker, and context. Assign the appropriate credibility rating based on the scale above, and provide a clear justification using facts and evidence.
+
+    Output format (json):
+    You must respond with a single json object. The json object must have exactly the following keys:
+    - "statement": repeat the input statement text.
+    - "speaker": the speaker name.
+    - "context": the context text.
+    - "label": one of the six labels: "TRUE", "mostly-true", "half-true", "barely-true", "FALSE", or "pants-fire".
+    - "justification": a short explanation that cites evidence from the search results.
+
+    Return only this json object and nothing else.
+
+    The field "Search Results" below contains text snippets extracted from the top Google Search results related to the statement. These snippets are partial web page texts returned by search. Use them as factual evidence to support your evaluation. If fewer than three snippets are provided, use whatever is available.
+
+    	Statement: {statement}
+        Subject(s): {subjects}
+        Speaker: {speaker}
+        Speaker's Job Title: {speaker_job_title}
+        State Info: {state_info}
+        Party Affiliation: {party_affiliation}
+        Barely-True: {barely_true_counts}
+        False: {false_counts}
+        Half-True: {half_true_counts}
+        Mostly-True: {mostly_true_counts}
+        Pants-Fire: {pants_on_fire_counts}
+        Context: {context}
+        Search Results:
+        [URL1_TEXT_BEGIN]
+        {url1_text}
+        [URL1_TEXT_END]
+        [URL2_TEXT_BEGIN]
+        {url2_text}
+        [URL2_TEXT_END]
+        [URL3_TEXT_BEGIN]
+        {url3_text}
+        [URL3_TEXT_END]

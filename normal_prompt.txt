@@ -40,8 +40,6 @@ You are an expert in detecting and analyzing fake news. Evaluate the credibility
 
     Return only this json object and nothing else.
 
-    The field "Search Results" below contains text snippets extracted from the top Google Search results related to the statement. These snippets are partial web page texts returned by search. Use them as factual evidence to support your evaluation. If fewer than three snippets are provided, use whatever is available.
-
     	Statement: {statement}
         Subject(s): {subjects}
         Speaker: {speaker}
@@ -54,13 +52,3 @@ You are an expert in detecting and analyzing fake news. Evaluate the credibility
         Mostly-True: {mostly_true_counts}
         Pants-Fire: {pants_on_fire_counts}
         Context: {context}
-        Search Results:
-        [URL1_TEXT_BEGIN]
-        {url1_text}
-        [URL1_TEXT_END]
-        [URL2_TEXT_BEGIN]
-        {url2_text}
-        [URL2_TEXT_END]
-        [URL3_TEXT_BEGIN]
-        {url3_text}
-        [URL3_TEXT_END]
